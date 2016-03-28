@@ -20,4 +20,4 @@ window.JournalApp.Collections.Posts = Backbone.Collection.extend({
     return post;
   }
 });
-JournalApp.Collections.posts = new JournalApp.Collections.Posts();
+window.JournalApp.Collections.posts = new JournalApp.Collections.Posts();
