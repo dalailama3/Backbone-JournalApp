@@ -1,11 +1,18 @@
 window.JournalApp.Routers.AppRouter = Backbone.Router.extend({
   routes: {
     "": "postsIndex",
+
+    "posts/new": "newPost",
     "posts/:id": "postsShow"
   },
 
+  newPost: function () {
+    var view = new JournalApp.Views.PostForm();
+    $("body").html(view.render().$el);
+  },
+
   postsShow: function (id) {
-    var model = JournalApp.Collections.posts.get(id)
+    var model = JournalApp.Collections.posts.getOrFetch(id)
     var view = new JournalApp.Views.PostShow({
       model: model
     });
