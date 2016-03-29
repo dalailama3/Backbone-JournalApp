@@ -8,11 +8,10 @@ window.JournalApp = {
       collection: JournalApp.Collections.posts
     });
 
-    JournalApp.Collections.posts.fetch({
-      success: function () {
-        $("body").append(view.render().$el);
-      }
-    });
+    JournalApp.Collections.posts.fetch();
+
+    $("body").append(view.render().$el);
+
 
   }
 };

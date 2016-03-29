@@ -1,8 +1,14 @@
 window.JournalApp.Views.PostsIndexItem = Backbone.View.extend({
   template: JST["posts/index_item"],
-  tagName: "li",
+  tagName: "tr",
 
-  
+  events: {
+    "click button.delete": "deleteItem"
+  },
+
+  deleteItem: function () {
+    this.model.destroy()
+  },
 
   render: function () {
     var renderedContent = this.template({post: this.model});
@@ -17,24 +23,37 @@ window.JournalApp.Views.PostsIndexItem = Backbone.View.extend({
 window.JournalApp.Views.PostsIndex = Backbone.View.extend({
 
   template: JST["posts/index"],
+  tagName: "table",
 
-  // initialize: function (options) {
-  //   this.posts = options.posts;
-  // },
+
+  initialize: function (options) {
+    this.listenTo(this.collection,
+      "sync remove",
+      this.render
+    );
+  },
+
+
+
+  refresh: function () {
+    var view = this;
+    this.collection.fetch();
+  },
 
   render: function () {
+    var content = this.template();
+    this.$el.html(content);
     var that = this;
-    JournalApp.Collections.posts.each(function(post) {
+
+    this.collection.each(function(post) {
 
       var li = new JournalApp.Views.PostsIndexItem({model: post});
 
-      var content = li.render().$el
-      that.$el.append(content);
+
+      that.$el.append(li.render().$el);
 
 
     });
-    // var renderedContent = this.template({posts: this.collection});
-    // this.$el.html(renderedContent);
 
     return this;
   }
