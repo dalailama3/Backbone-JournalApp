@@ -18,6 +18,10 @@ window.JournalApp.Views.PostsIndexItem = Backbone.View.extend({
   }
 });
 
+window.JournalApp.Views.PostsShow = Backbone.View.extend({
+  
+});
+
 
 
 window.JournalApp.Views.PostsIndex = Backbone.View.extend({
@@ -28,7 +32,7 @@ window.JournalApp.Views.PostsIndex = Backbone.View.extend({
 
   initialize: function (options) {
     this.listenTo(this.collection,
-      "sync remove",
+      "remove reset",
       this.render
     );
   },

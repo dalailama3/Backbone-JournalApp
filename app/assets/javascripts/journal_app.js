@@ -8,7 +8,7 @@ window.JournalApp = {
       collection: JournalApp.Collections.posts
     });
 
-    JournalApp.Collections.posts.fetch();
+    JournalApp.Collections.posts.fetch({reset: true});
 
     $("body").append(view.render().$el);
 
