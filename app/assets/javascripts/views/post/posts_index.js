@@ -18,8 +18,15 @@ window.JournalApp.Views.PostsIndexItem = Backbone.View.extend({
   }
 });
 
-window.JournalApp.Views.PostsShow = Backbone.View.extend({
-  
+window.JournalApp.Views.PostShow = Backbone.View.extend({
+  template: JST["posts/show"],
+  render: function () {
+    var content = this.template({post: this.model})
+    this.$el.html(content);
+
+    return this;
+  }
+
 });
 
 
