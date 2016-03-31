@@ -2,7 +2,8 @@ window.JournalApp.Views.PostForm = Backbone.View.extend({
   template: JST["posts/form"],
 
   events: {
-    "submit form": "submit"
+    "submit form": "submit",
+    "keyup textarea": "previewPost"
   },
 
   render: function () {
@@ -12,6 +13,15 @@ window.JournalApp.Views.PostForm = Backbone.View.extend({
     this.$el.html(content);
 
     return this;
+  },
+
+  previewPost: function (event) {
+    var text = $("textarea").val();
+    var previewContent = marked(_.escape(text));
+    this.$("div.preview").html(previewContent);
+
+    return this;
+
   },
 
 
