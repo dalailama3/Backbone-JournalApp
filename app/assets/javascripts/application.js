@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.serializejson
+//= require marked
 //= require underscore
 //= require backbone
 //= require journal_app

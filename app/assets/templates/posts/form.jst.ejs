@@ -1,7 +1,7 @@
 <% if (typeof post !== "undefined") { %>
   <% var greeting = "Edit Post!"; %>
-  <% var title = (post.get("title") || ""); %>
-  <% var body = (post.get("body") || ""); %>
+  <% var title = (post.escape("title") || ""); %>
+  <% var body = (post.escape("body") || ""); %>
 <% } else { %>
   <% greeting = "Create Post!"; %>
 
@@ -17,7 +17,7 @@
   <br>
 
   <label for="post_body">Body</label>
-  <textarea name="post[body]" placeholder= "<%= body %>" id="post_body"></textarea>
+  <textarea name="post[body]"  id="post_body"><%= body %></textarea>
   <br>
 
   <input type="submit">

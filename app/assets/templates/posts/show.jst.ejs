@@ -1,6 +1,6 @@
 <h3><%= post.escape("title") %></h3>
 
-<%= post.escape("body") %>
+<%= marked(post.escape("body")) %>
 
 <br>
 

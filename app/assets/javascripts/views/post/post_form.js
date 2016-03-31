@@ -33,7 +33,8 @@ window.JournalApp.Views.PostForm = Backbone.View.extend({
       success: function () {
 
         JournalApp.Collections.posts.add(newPost);
-        Backbone.history.navigate("", {trigger: true});
+        var id = newPost.id;
+        Backbone.history.navigate("posts/" + id, {trigger: true});
 
       }
     });
