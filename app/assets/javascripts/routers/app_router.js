@@ -50,9 +50,9 @@ window.JournalApp.Routers.AppRouter = Backbone.Router.extend({
   _swapView: function (view) {
     if (this.currentView) {
       this.currentView.remove();
-    } else {
-      this.currentView = view;
     }
+    this.currentView = view;
+
     $("body").html(view.render().$el);
 
   }

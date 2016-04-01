@@ -1,9 +1,16 @@
-<h3><%= post.escape("title") %></h3>
+<h3 class="edit-title"><%= post.escape("title") %></h3>
+<% var title = post.escape("title") %>
 
-<%= marked(post.escape("body")) %>
+<div class="edit-body"><%= marked(post.escape("body")) %></div>
+
+<input type="hidden" class="post-title" value="<%= title %>"/>
+<textarea id="post-body" style="display: none;"><%= post.escape("body")%></textarea>
+
 
 <br>
 
 <a href="#posts/edit" class="edit-post" data-id="<%= post.get("id") %>">Edit Post</a>
 
 <a href="#/">Back to Index</a>
+
+<button class="delete">Delete Post</button>
