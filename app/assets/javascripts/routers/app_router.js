@@ -1,4 +1,5 @@
 window.JournalApp.Routers.AppRouter = Backbone.Router.extend({
+  currentView: null,
   routes: {
     "": "postsIndex",
 
@@ -8,10 +9,12 @@ window.JournalApp.Routers.AppRouter = Backbone.Router.extend({
   },
 
   newPost: function () {
-    var view = new JournalApp.Views.PostForm({
+    var newView = new JournalApp.Views.PostForm({
       collection: JournalApp.Collections.posts
     });
-    $("body").html(view.render().$el);
+
+
+    this._swapView(newView);
   },
 
   editPost: function () {
@@ -22,24 +25,35 @@ window.JournalApp.Routers.AppRouter = Backbone.Router.extend({
       model: editPost
     });
 
-    $("body").html(editView.render().$el);
+    this._swapView(editView);
   },
 
   postsShow: function (id) {
     var model = JournalApp.Collections.posts.getOrFetch(id)
-    var view = new JournalApp.Views.PostShow({
+    var showView = new JournalApp.Views.PostShow({
       model: model
     });
-    $("body").html(view.render().$el);
+
+    this._swapView(showView);
   },
 
   postsIndex: function () {
-    var view = new JournalApp.Views.PostsIndex ({
+    var indexView = new JournalApp.Views.PostsIndex ({
       collection: JournalApp.Collections.posts
     });
 
     JournalApp.Collections.posts.fetch({reset: true});
 
+    this._swapView(indexView);
+  },
+
+  _swapView: function (view) {
+    if (this.currentView) {
+      this.currentView.remove();
+    } else {
+      this.currentView = view;
+    }
     $("body").html(view.render().$el);
+
   }
 });
